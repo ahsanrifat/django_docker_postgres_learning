@@ -4,3 +4,4 @@ psycopg2-binary==2.9.5
 django-filter==22.1
 markdown==3.4.1
 djangorestframework_simplejwt==5.2.2
+pymongo==4.3.2

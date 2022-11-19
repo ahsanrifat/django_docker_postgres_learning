@@ -14,7 +14,13 @@ python manage.py collectstatic --noinput
 python manage.py makemigrations --noinput
 python manage.py migrate --noinput
 echo "from django.contrib.auth import get_user_model;
-get_user_model().objects.filter(email='$DJANGO_ADMIN_EMAIL').delete();
-get_user_model().objects.create_superuser('$DJANGO_ADMIN_EMAIL', '$DJANGO_ADMIN_PASSWORD')" | python manage.py shell
+admin=get_user_model().objects.filter(email='$DJANGO_ADMIN_EMAIL');
+if not admin:
+  print('Creating Admin')
+  get_user_model().objects.create_superuser('$DJANGO_ADMIN_EMAIL', '$DJANGO_ADMIN_PASSWORD')
+else:
+  print('Admin registered already')
+  print(admin[0])
+  " | python manage.py shell
 
 exec "$@"
