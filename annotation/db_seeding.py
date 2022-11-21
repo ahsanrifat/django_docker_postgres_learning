@@ -56,12 +56,12 @@ def insert_dummy_data_in_database():
     validator_id_list = [300, 307, 376, 391, 417, 419, 444, 300, 447]
     ner_data_count = models.Data.objects.all().count()
     print(f"NER Data Count---> {ner_data_count}")
-    if ner_data_count < 10000:
+    if ner_data_count < 10000000:
         print("Preparing Fake NER data to populate the DB----------")
         ner_data_list = []
         for project_id in range(1, 51):
             # ner data per project
-            for ner_data_serial in range(randint(200, 700)):
+            for ner_data_serial in range(randint(20, 70)):
                 ner_text = produce_random_sentence()
                 # randomly picking span number for each ner_data
                 annotation_list = []

@@ -1,0 +1,15 @@
+-- Query 1
+explain analyze select * from data
+inner join annotation an
+	on an.data_id=data.id
+where an.annotator_id in (198,12) and
+	data.project_id=11
+	and data.group_id=107;
+-- Query 2
+select * from (select * from data where project_id=11 and group_id=107) data
+inner join (select * from annotation where annotator_id=198) an
+	on an.data_id=data.id
+inner join (select * from validation where is_validated=true) vd
+	on vd.data_id=data.id;
+
+select project_id, group_id from data where id in (select data_id from annotation where annotator_id =198);
